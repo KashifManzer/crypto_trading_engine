@@ -1,0 +1,4 @@
+aiohttp
+pandas
+pyarrow
+python-dotenv
