@@ -13,7 +13,7 @@ Reliability: Standardized data structures and error handling are enforced by the
 Setup and Installation
 Clone the Repository:
 
-`git clone https://github.com/KashifManzer/crypto_trading_engine`
+`https://github.com/KashifManzer/crypto_trading_engine.git` <br>
 `cd crypto_trading_engine`
 
 Create a Virtual Environment:
