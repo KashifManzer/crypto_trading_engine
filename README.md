@@ -1,4 +1,5 @@
-Work Trial: Cross-Exchange Trading Engine Core
+# Work Trial: Cross-Exchange Trading Engine Core
+
 This project is a foundational implementation of a high-performance application designed to interact with multiple cryptocurrency exchanges, as outlined in the work trial.
 
 Project Architecture
@@ -20,7 +21,7 @@ Create a Virtual Environment:
 
 `python -m venv venv` <br>
 `source venv/bin/activate` <br>
- On Windows, use <br>
+On Windows, use <br>
 `venv\Scripts\activate` <br>
 
 Install Dependencies:
@@ -28,9 +29,12 @@ Install Dependencies:
 `pip install -r requirements.txt`
 
 Configure API Keys:
-Create a `.env` file in the project root directory. This file will securely store your API keys outside of the codebase. Add your keys to this file, following the format in the provided .env.example.
+Create a `.env` file in the project root directory. This file will securely store your API keys outside of the codebase. Add your keys to this file, following the format in the provided env.example.
 
-.env file example:
+First, copy the example file:
+`cp env.example .env`
+
+Then edit the `.env` file with your actual API keys:
 
 BINANCE_API_KEY="YOUR_BINANCE_KEY"
 BINANCE_API_SECRET="YOUR_BINANCE_SECRET"
@@ -49,6 +53,8 @@ OKX_PASSPHRASE="YOUR_OKX_PASSPHRASE"
 BITMART_API_KEY="YOUR_BITMART_KEY"
 BITMART_API_SECRET="YOUR_BITMART_SECRET"
 BITMART_MEMO="YOUR_BITMART_MEMO"
+
+**Note**: Currently, only Binance is fully implemented. Other exchanges are template implementations that will return mock data.
 
 How to Run
 Data Fetching Examples
