@@ -18,8 +18,10 @@ Clone the Repository:
 
 Create a Virtual Environment:
 
-`python -m venv venv`
-`source venv/bin/activate` # On Windows, use `venv\Scripts\activate`
+`python -m venv venv` <br>
+`source venv/bin/activate` <br>
+ On Windows, use <br>
+`venv\Scripts\activate` <br>
 
 Install Dependencies:
 
