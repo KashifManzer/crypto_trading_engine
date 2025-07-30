@@ -13,20 +13,20 @@ Reliability: Standardized data structures and error handling are enforced by the
 Setup and Installation
 Clone the Repository:
 
-git clone <your-repo-link>
-cd crypto_trading_engine
+`git clone https://github.com/KashifManzer/crypto_trading_engine`
+`cd crypto_trading_engine`
 
 Create a Virtual Environment:
 
-python -m venv venv
-source venv/bin/activate # On Windows, use `venv\Scripts\activate`
+`python -m venv venv`
+`source venv/bin/activate` # On Windows, use `venv\Scripts\activate`
 
 Install Dependencies:
 
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 Configure API Keys:
-Create a .env file in the project root directory. This file will securely store your API keys outside of the codebase. Add your keys to this file, following the format in the provided .env.example.
+Create a `.env` file in the project root directory. This file will securely store your API keys outside of the codebase. Add your keys to this file, following the format in the provided .env.example.
 
 .env file example:
 
