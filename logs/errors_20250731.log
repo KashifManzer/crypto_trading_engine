@@ -1,0 +1,9 @@
+2025-07-31 23:13:02,888 - trading_engine - ERROR - error:65 - This is an error message
+2025-07-31 23:13:09,893 - trading_engine - ERROR - error:65 - All retries exhausted for failing_func. Final error: Test error
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/crypto_trading_engine/utils/rate_limiter.py", line 107, in execute_with_retry
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/apple/Desktop/crypto_trading_engine/test_improvements.py", line 49, in failing_func
+    raise Exception("Test error")
+Exception: Test error

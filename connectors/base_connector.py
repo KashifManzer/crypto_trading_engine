@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Dict, List, Any, Optional
+from utils.logger import logger
+from utils.rate_limiter import rate_limiter, retry_handler
 
 class ExchangeConnector(ABC):
     """
@@ -18,6 +20,7 @@ class ExchangeConnector(ABC):
             **kwargs: Additional credentials like passphrase or memo.
         """
         if not api_key or not api_secret:
+            logger.error(f"API key and secret must be provided for {self.__class__.__name__}")
             raise ValueError(f"API key and secret must be provided for {self.__class__.__name__}")
             
         self.api_key = api_key
@@ -26,6 +29,8 @@ class ExchangeConnector(ABC):
         # Store any other credentials passed
         for key, value in kwargs.items():
             setattr(self, key, value)
+        
+        logger.info(f"Initialized {self.__class__.__name__} connector")
 
     @abstractmethod
     async def get_best_bid_ask(self, pair: str) -> Dict[str, float]:

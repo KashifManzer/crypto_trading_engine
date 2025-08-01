@@ -1,0 +1,105 @@
+2025-07-31 23:13:02,888 - trading_engine - INFO - info:57 - 🧪 Testing Improvements
+2025-07-31 23:13:02,888 - trading_engine - INFO - info:57 - ==================================================
+2025-07-31 23:13:02,888 - trading_engine - INFO - info:57 - --- Logging System ---
+2025-07-31 23:13:02,888 - trading_engine - INFO - info:57 - Testing logging system...
+2025-07-31 23:13:02,888 - trading_engine - WARNING - warning:61 - This is a warning message
+2025-07-31 23:13:02,888 - trading_engine - ERROR - error:65 - This is an error message
+2025-07-31 23:13:02,888 - trading_engine - INFO - info:57 - ✅ Logging system test completed
+2025-07-31 23:13:02,888 - trading_engine - INFO - info:57 - --- Rate Limiter ---
+2025-07-31 23:13:02,888 - trading_engine - INFO - info:57 - Testing rate limiter...
+2025-07-31 23:13:02,888 - trading_engine - INFO - info:57 - ✅ Rate limiter test completed
+2025-07-31 23:13:02,888 - trading_engine - INFO - info:57 - --- Retry Handler ---
+2025-07-31 23:13:02,888 - trading_engine - INFO - info:57 - Testing retry handler...
+2025-07-31 23:13:02,888 - trading_engine - INFO - info:57 - Retry handler successful result: success
+2025-07-31 23:13:02,888 - trading_engine - WARNING - warning:61 - Attempt 1 failed for failing_func: Test error. Retrying in 1.0s...
+2025-07-31 23:13:03,890 - trading_engine - WARNING - warning:61 - Attempt 2 failed for failing_func: Test error. Retrying in 2.0s...
+2025-07-31 23:13:05,891 - trading_engine - WARNING - warning:61 - Attempt 3 failed for failing_func: Test error. Retrying in 4.0s...
+2025-07-31 23:13:09,893 - trading_engine - ERROR - error:65 - All retries exhausted for failing_func. Final error: Test error
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/crypto_trading_engine/utils/rate_limiter.py", line 107, in execute_with_retry
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/apple/Desktop/crypto_trading_engine/test_improvements.py", line 49, in failing_func
+    raise Exception("Test error")
+Exception: Test error
+2025-07-31 23:13:09,895 - trading_engine - INFO - info:57 - Retry handler correctly caught error: Test error
+2025-07-31 23:13:09,895 - trading_engine - INFO - info:57 - ✅ Retry handler test completed
+2025-07-31 23:13:09,895 - trading_engine - INFO - info:57 - --- Trading Engine ---
+2025-07-31 23:13:09,895 - trading_engine - INFO - info:57 - Testing trading engine with logging...
+2025-07-31 23:13:09,895 - trading_engine - INFO - info:57 - Initialized BinanceConnector connector
+2025-07-31 23:13:09,895 - trading_engine - INFO - info:57 - Successfully loaded connector: binance
+2025-07-31 23:13:09,895 - trading_engine - INFO - info:57 - Initialized KucoinConnector connector
+2025-07-31 23:13:09,895 - trading_engine - INFO - info:57 - Successfully loaded connector: kucoin
+2025-07-31 23:13:09,895 - trading_engine - INFO - info:57 - Initialized BybitConnector connector
+2025-07-31 23:13:09,895 - trading_engine - INFO - info:57 - Successfully loaded connector: bybit
+2025-07-31 23:13:09,895 - trading_engine - INFO - info:57 - Initialized OkxConnector connector
+2025-07-31 23:13:09,895 - trading_engine - INFO - info:57 - Successfully loaded connector: okx
+2025-07-31 23:13:09,895 - trading_engine - INFO - info:57 - Initialized BitmartConnector connector
+2025-07-31 23:13:09,895 - trading_engine - INFO - info:57 - Successfully loaded connector: bitmart
+2025-07-31 23:13:09,896 - trading_engine - INFO - info:57 - Engine created with 5 connectors
+2025-07-31 23:13:09,896 - trading_engine - INFO - info:57 - ✅ Trading engine test completed
+2025-07-31 23:13:09,896 - trading_engine - INFO - info:57 - ==================================================
+2025-07-31 23:13:09,896 - trading_engine - INFO - info:57 - Results: 4/4 tests passed
+2025-07-31 23:13:09,896 - trading_engine - INFO - info:57 - 🎉 All improvement tests passed!
+2025-07-31 23:13:16,955 - trading_engine - INFO - info:57 - 🧪 Crypto Trading Engine Setup Test
+2025-07-31 23:13:16,955 - trading_engine - INFO - info:57 - ==================================================
+2025-07-31 23:13:16,955 - trading_engine - INFO - info:57 - --- File Structure ---
+2025-07-31 23:13:16,955 - trading_engine - INFO - info:57 - Testing file structure...
+2025-07-31 23:13:16,955 - trading_engine - INFO - info:57 - ✅ config.py
+2025-07-31 23:13:16,955 - trading_engine - INFO - info:57 - ✅ requirements.txt
+2025-07-31 23:13:16,955 - trading_engine - INFO - info:57 - ✅ README.md
+2025-07-31 23:13:16,955 - trading_engine - INFO - info:57 - ✅ env.example
+2025-07-31 23:13:16,955 - trading_engine - INFO - info:57 - ✅ connectors/__init__.py
+2025-07-31 23:13:16,955 - trading_engine - INFO - info:57 - ✅ core/__init__.py
+2025-07-31 23:13:16,955 - trading_engine - INFO - info:57 - ✅ utils/__init__.py
+2025-07-31 23:13:16,956 - trading_engine - INFO - info:57 - ✅ scripts/__init__.py
+2025-07-31 23:13:16,956 - trading_engine - INFO - info:57 - ✅ connectors/base_connector.py
+2025-07-31 23:13:16,956 - trading_engine - INFO - info:57 - ✅ connectors/binance_connector.py
+2025-07-31 23:13:16,956 - trading_engine - INFO - info:57 - ✅ core/engine.py
+2025-07-31 23:13:16,956 - trading_engine - INFO - info:57 - ✅ core/symbol_mapper.py
+2025-07-31 23:13:16,956 - trading_engine - INFO - info:57 - ✅ utils/helpers.py
+2025-07-31 23:13:16,956 - trading_engine - INFO - info:57 - ✅ utils/logger.py
+2025-07-31 23:13:16,956 - trading_engine - INFO - info:57 - ✅ utils/rate_limiter.py
+2025-07-31 23:13:16,956 - trading_engine - INFO - info:57 - ✅ scripts/performance_test.py
+2025-07-31 23:13:16,956 - trading_engine - INFO - info:57 - ✅ scripts/data_pipeline.py
+2025-07-31 23:13:16,956 - trading_engine - INFO - info:57 - ✅ data/
+2025-07-31 23:13:16,956 - trading_engine - INFO - info:57 - ✅ connectors/
+2025-07-31 23:13:16,956 - trading_engine - INFO - info:57 - ✅ core/
+2025-07-31 23:13:16,956 - trading_engine - INFO - info:57 - ✅ utils/
+2025-07-31 23:13:16,956 - trading_engine - INFO - info:57 - ✅ scripts/
+2025-07-31 23:13:16,956 - trading_engine - INFO - info:57 - --- Imports ---
+2025-07-31 23:13:16,956 - trading_engine - INFO - info:57 - Testing imports...
+2025-07-31 23:13:16,964 - trading_engine - INFO - info:57 - ✅ config.py imported successfully
+2025-07-31 23:13:16,964 - trading_engine - INFO - info:57 - ✅ base_connector imported successfully
+2025-07-31 23:13:17,012 - trading_engine - INFO - info:57 - ✅ TradingEngine imported successfully
+2025-07-31 23:13:17,012 - trading_engine - INFO - info:57 - ✅ SymbolMapper imported successfully
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - ✅ helpers imported successfully
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - --- Symbol Mapper ---
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - Testing symbol mapper...
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - ✅ Universal 'BTC/USDT' -> Binance: 'BTCUSDT'
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - ✅ Universal 'BTC/USDT' -> KuCoin: 'BTC-USDT'
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - ✅ Binance 'BTCUSDT' -> Universal: 'BTC/USDT'
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - ✅ KuCoin 'BTC-USDT' -> Universal: 'BTC/USDT'
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - --- Helper Functions ---
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - Testing helper functions...
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - ✅ APR calculation: 0.0100% every 8h = 10.95% APR
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - --- Trading Engine ---
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - Testing trading engine...
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - Initialized BinanceConnector connector
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - Successfully loaded connector: binance
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - Initialized KucoinConnector connector
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - Successfully loaded connector: kucoin
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - Initialized BybitConnector connector
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - Successfully loaded connector: bybit
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - Initialized OkxConnector connector
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - Successfully loaded connector: okx
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - Initialized BitmartConnector connector
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - Successfully loaded connector: bitmart
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - ✅ Engine created with 5 connectors
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - ==================================================
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - Results: 5/5 tests passed
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - 🎉 All tests passed! The project is ready to use.
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - Next steps:
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - 1. Copy env.example to .env
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - 2. Add your API keys to .env
+2025-07-31 23:13:17,014 - trading_engine - INFO - info:57 - 3. Run: python -m core.engine

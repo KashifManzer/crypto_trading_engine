@@ -8,6 +8,7 @@ from connectors.kucoin_connector import KucoinConnector
 from connectors.bybit_connector import BybitConnector
 from connectors.okx_connector import OkxConnector
 from connectors.bitmart_connector import BitmartConnector
+from utils.logger import logger
 
 class TradingEngine:
     """
@@ -43,19 +44,17 @@ class TradingEngine:
                     if connector_class:
                         # Instantiate the connector with its credentials
                         connectors[name] = connector_class(**creds)
-                        print(f"Successfully loaded connector: {name}")
+                        logger.info(f"Successfully loaded connector: {name}")
                         loaded_count += 1
                     else:
-                        print(f"Warning: No connector class found for {name}")
+                        logger.warning(f"No connector class found for {name}")
                 except Exception as e:
-                    print(f"Failed to load connector {name}: {e}")
+                    logger.error(f"Failed to load connector {name}: {str(e)}")
             else:
-                print(f"Skipping {name}: API keys not configured")
+                logger.info(f"Skipping {name}: API keys not configured")
 
         if loaded_count == 0:
-            print("\n⚠️  WARNING: No connectors were loaded!")
-            print("Please check your .env file and ensure at least one exchange has API keys configured.")
-            print("You can copy env.example to .env and fill in your API keys.")
+            logger.warning("No connectors were loaded! Please check your .env file and ensure at least one exchange has API keys configured.")
         
         return connectors
 
@@ -72,8 +71,10 @@ class TradingEngine:
             exchange name and price for each.
         """
         if not self.connectors:
+            logger.warning("No connectors available for cross-exchange bid/ask search")
             return {'best_bid': None, 'best_ask': None, 'error': 'No connectors available'}
         
+        logger.info(f"Finding best cross-exchange bid/ask for {pair}")
         tasks = [conn.get_best_bid_ask(pair) for conn in self.connectors.values()]
         results = await asyncio.gather(*tasks, return_exceptions=True)
         
@@ -85,7 +86,7 @@ class TradingEngine:
             exchange_name = list(self.connectors.keys())[i]
             if isinstance(result, Exception):
                 error_msg = f"Error fetching data from {exchange_name}: {result}"
-                print(error_msg)
+                logger.error(error_msg)
                 errors.append(error_msg)
                 continue
 
@@ -100,6 +101,11 @@ class TradingEngine:
         result = {'best_bid': best_bid, 'best_ask': best_ask}
         if errors:
             result['errors'] = errors
+            logger.warning(f"Found {len(errors)} errors during cross-exchange search")
+        
+        if best_bid and best_ask:
+            logger.info(f"Best cross-exchange prices for {pair}: bid={best_bid['price']} on {best_bid['exchange']}, ask={best_ask['price']} on {best_ask['exchange']}")
+        
         return result
 
 # Example Usage Block
@@ -107,30 +113,29 @@ async def main():
     """Main function to demonstrate the TradingEngine's capabilities."""
     engine = TradingEngine()
     if not engine.connectors:
-        print("\nNo connectors were loaded. Please check your .env file and API keys.")
-        print("You can copy env.example to .env and fill in your API keys.")
+        logger.warning("No connectors were loaded. Please check your .env file and API keys.")
         return
 
-    print("\nFinding best cross-exchange bid/ask for BTC/USDT...")
+    logger.info("Finding best cross-exchange bid/ask for BTC/USDT...")
     best_prices = await engine.find_best_cross_exchange_bid_ask('BTC/USDT')
     
     if best_prices.get('error'):
-        print(f"Error: {best_prices['error']}")
+        logger.error(f"Error: {best_prices['error']}")
         return
     
     if best_prices['best_bid'] and best_prices['best_ask']:
-        print(f"  -> Best Bid: {best_prices['best_bid']['price']} on {best_prices['best_bid']['exchange']}")
-        print(f"  -> Best Ask: {best_prices['best_ask']['price']} on {best_prices['best_ask']['exchange']}")
+        logger.info(f"Best Bid: {best_prices['best_bid']['price']} on {best_prices['best_bid']['exchange']}")
+        logger.info(f"Best Ask: {best_prices['best_ask']['price']} on {best_prices['best_ask']['exchange']}")
         
         # Calculate spread
         spread = best_prices['best_ask']['price'] - best_prices['best_bid']['price']
         spread_percent = (spread / best_prices['best_bid']['price']) * 100
-        print(f"  -> Spread: {spread:.2f} ({spread_percent:.4f}%)")
+        logger.info(f"Spread: {spread:.2f} ({spread_percent:.4f}%)")
     else:
-        print("Could not retrieve prices from any exchange.")
+        logger.warning("Could not retrieve prices from any exchange.")
     
     if best_prices.get('errors'):
-        print(f"\nErrors encountered: {len(best_prices['errors'])}")
+        logger.warning(f"Errors encountered: {len(best_prices['errors'])}")
 
 if __name__ == '__main__':
     # This allows the script to be run directly to test its functionality.
